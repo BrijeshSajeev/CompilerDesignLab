@@ -47,7 +47,7 @@ def regex_to_nfa(regex):
   return nfa
 
 
-regex = "a * b | c"
+regex = "a * b * c | d"
 
 nfa = regex_to_nfa(regex.split())
 print(regex.split(' '))
