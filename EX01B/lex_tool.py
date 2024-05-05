@@ -33,7 +33,7 @@ t_ignore = r' |\t'
  
 def t_NEWLINE(t): 
     r'\n+' 
-    t.lexer.lineno += len(t.value) 
+    # t.lexer.lineno += len(t.value) 
  
 def t_error(t): 
     print("Illegal character '%s'" % t.value[0]) 
