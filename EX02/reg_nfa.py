@@ -16,8 +16,9 @@ def regex_to_nfa(regex):
       charnext = 'ε'
     
     if char.isalpha():
-      nfa['states'].append(state)
+      
       if charnext == '*':
+        nfa['states'].append(state)
         nfa['states'].append(state+1)
         nfa['states'].append(state+2)
         nfa['states'].append(state+3)
@@ -29,6 +30,7 @@ def regex_to_nfa(regex):
         state += 3
       
       if charnext == '|':
+        nfa['states'].append(state)
         charafter=regex[i+2]
         nfa['states'].append(state+1)
         nfa['states'].append(state+2)
