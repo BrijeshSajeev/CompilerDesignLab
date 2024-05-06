@@ -5,20 +5,6 @@ def getKey(k):
     return None
 
 #Finding FirstSet-----
-def find(x):
-    y = []
-    for i in x:
-        if i[0] in d.keys(): #checking Non-terminal
-            y.extend(find(d[i[0]]))
-        else: #if terminal add to list y and add y to firstset
-            y.append(i[0])     
-    return y   
-
-def firstSet():
-    print("FIRST-SET:")
-    for name, production in d.items():
-        first[name] = find(production)
-        print(f'{name}:{first[name]}') # print name with its firstset
 
 def followSet():
     print("FOLLOW-SET:")
@@ -43,16 +29,44 @@ def followSet():
                         follow[i] = y
     for name,value in follow.items():
         print(f'{name}:{value}')
-                        
-# main function--------    
-n = int(input("Enter no of production: "))
-d = {}
+
+
+def find(x):
+    y = []
+    for i in x:
+        if i[0] in d.keys(): #checking Non-terminal
+            y.extend(find(d[i[0]]))
+        else: #if terminal add to list y and add y to firstset
+            y.append(i[0])     
+    return y   
+
+def firstSet():
+    print("FIRST-SET:")
+    for name, production in d.items():
+        first[name] = find(production)
+        print(f'{name}:{first[name]}') # print name with its firstset
+
+
+d = {
+    'E':['TX'],
+    'X':['+TX','e'],
+    'T':['FY'],
+    'Y':['*FY','e'],
+    'F':['(E)','i']
+
+}
 first = {}
 follow = {}
-for i in range(n):
-    ip = input(f'Enter Production {i+1}:')
-    name, prod = ip.split('->')
-    p = prod.split('|')
-    d[name] = p #save input in dictionary form
+
+# main function--------    
+# n = int(input("Enter no of production: "))
+# d = {}
+# first = {}
+# follow = {}
+# for i in range(n):
+#     ip = input(f'Enter Production {i+1}:')
+#     name, prod = ip.split('->')
+#     p = prod.split('|')
+#     d[name] = p #save input in dictionary form
 firstSet()
 followSet()
